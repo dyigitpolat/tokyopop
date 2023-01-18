@@ -108,39 +108,130 @@ function drawSmoothTriangle(t, a, color)
         cx_arc, cy_arc, r, rad(90), rad(-150), color)
 }
 
-function render(beta, gamma, p, q)
+function cos_interpolate(x)
+{
+    return 0.5 * (1 - Math.cos(x * Math.PI))
+}
+
+function interpolate()
+{
+
+}
+
+function render(beta, gamma, alpha, sigma, p, q)
 {
     if(p - q > 2) p = q - 2;
 
     svg.innerHTML = ""
-    scale = 850.0
+    scale = WIDTH * sqrt(3) * 0.9
     
     drawFilledRectangle(0, 0, WIDTH, WIDTH, "darkred")
-    drawFilledCircle(CX, CY, 0.3 * scale , "black")
+    drawFilledCircle(CX, CY, 1.03 * scale / (2*sqrt(3)), "black")
     
     for(let i = p; i <= q; i++)
     {
-        t = 1.0 - (Math.pow(i, beta) / Math.pow(q, beta))
-        a = scale * Math.pow(i, gamma) / Math.pow(q, gamma)
+        step = (1.0 * i) / q
+        t = 1.0 - (
+            sigma * Math.pow(cos_interpolate(Math.pow(step, alpha)), beta) + 
+            (1-sigma) * step)
+        a = Math.pow(step, gamma) * scale 
         drawSmoothTriangle(t, a, "lightgrey")
+    }
+}
+
+function h(a,t) 
+{
+    return a*(t+1)*sqrt(3)/6
+}
+
+
+function render_optimal(p,q)
+{
+    if(p - q > 2) p = q - 2;
+    svg.innerHTML = ""
+    scale = WIDTH * sqrt(3) * 0.9
+
+    drawFilledRectangle(0, 0, WIDTH, WIDTH, "darkred")
+    drawFilledCircle(CX, CY, 1.03 * scale / (2*sqrt(3)), "black")
+    
+    max_h = 1.0 / (2*sqrt(3))
+
+    for(let i = p; i <= q; i++)
+    {
+        step = (1.0 * i) / q
+        h_ = step * max_h
+
+        a = step 
+        t = 1 - step
+        delta = 0.0001
+        
+        while(Math.abs(h(a,t) - h_) > 0.001)
+        {
+            dir0 = Math.abs(h(a-delta,t) - h_) 
+            dir1 = Math.abs(h(a+delta,t) - h_) 
+            dir2 = Math.abs(h(a,t-delta) - h_) 
+            dir3 = Math.abs(h(a,t+delta) - h_) 
+
+            
+            if(dir2 < dir0 && dir2 < dir1 && dir2 < dir3)
+            {
+                t -= delta
+            }
+
+            if(dir1 < dir0 && dir1 < dir2 && dir1 < dir3)
+            {
+                a += delta
+            }
+
+            if(dir3 < dir0 && dir3 < dir1 && dir3 < dir2)
+            {
+                t += delta
+            }
+
+            if(dir0 < dir1 && dir0 < dir2 && dir0 < dir3)
+            {
+                a -= delta
+            }
+        }
+        
+        drawSmoothTriangle(t, a * scale, "lightgrey")
     }
 }
 
 function update()
 {
-
     beta = parseFloat(document.getElementById("beta_slider").value)
     gamma = parseFloat(document.getElementById("gamma_slider").value)
+    alpha = parseFloat(document.getElementById("alpha_slider").value)
+    sigma = parseFloat(document.getElementById("sigma_slider").value)
     p = parseInt(document.getElementById("p_slider").value)
     q = parseInt(document.getElementById("q_slider").value)
 
 
     document.getElementById("beta_out").innerHTML = beta
     document.getElementById("gamma_out").innerHTML = gamma
+    document.getElementById("alpha_out").innerHTML = alpha
+    document.getElementById("sigma_out").innerHTML = sigma
     document.getElementById("p_out").innerHTML = p
     document.getElementById("q_out").innerHTML = q
 
-    render(beta, gamma, p, q)
+    if(document.getElementById("optimal").checked)
+    {
+        document.getElementById("beta_slider").disabled = true
+        document.getElementById("gamma_slider").disabled = true
+        document.getElementById("alpha_slider").disabled = true
+        document.getElementById("sigma_slider").disabled = true
+        render_optimal(p,q)
+    }
+    else
+    {
+        document.getElementById("beta_slider").disabled = false
+        document.getElementById("gamma_slider").disabled = false
+        document.getElementById("alpha_slider").disabled = false
+        document.getElementById("sigma_slider").disabled = false
+        render(beta, gamma, alpha, sigma, p, q)
+    }
+
     document.getElementById("svg_code").innerHTML = svg.outerHTML
 }
 
