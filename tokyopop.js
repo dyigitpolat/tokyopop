@@ -113,14 +113,9 @@ function cos_interpolate(x)
     return 0.5 * (1 - Math.cos(x * Math.PI))
 }
 
-function interpolate()
-{
-
-}
-
 function render(beta, gamma, alpha, sigma, p, q)
 {
-    if(p - q > 2) p = q - 2;
+    if(q - p < 2) p = q - 2;
 
     svg.innerHTML = ""
     scale = WIDTH * sqrt(3) * 0.9
@@ -144,10 +139,17 @@ function h(a,t)
     return a*(t+1)*sqrt(3)/6
 }
 
+function side_of_sharp_triangle(h)
+{
+    // h = a * 2 * sqrt(3) / 3
+    // a = 3 * h / (2 * sqrt(3))
+    return 6 * h / (2 * sqrt(3))
+}
+
 
 function render_optimal(p,q)
 {
-    if(p - q > 2) p = q - 2;
+    if(q - p < 2) p = q - 2;
     svg.innerHTML = ""
     scale = WIDTH * sqrt(3) * 0.9
 
@@ -194,7 +196,10 @@ function render_optimal(p,q)
             }
         }
         
-        drawSmoothTriangle(t, a * scale, "lightgrey")
+        if(i == p)
+            drawSmoothTriangle(1.0, side_of_sharp_triangle(h_) * scale, "lightgrey")
+        else
+            drawSmoothTriangle(t, a * scale, "lightgrey")
     }
 }
 
