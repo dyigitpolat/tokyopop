@@ -73,15 +73,6 @@ function drawLine(x1, y1, x2, y2, color) {
   svg.appendChild(line);
 }
 
-function drawPoint(x, y, color) {
-  let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-  circle.setAttribute("cx", x);
-  circle.setAttribute("cy", y);
-  circle.setAttribute("r", 2);
-  circle.setAttribute("fill", color);
-  svg.appendChild(circle);
-}
-
 function rad(degrees) {
   return (degrees * Math.PI) / 180;
 }
