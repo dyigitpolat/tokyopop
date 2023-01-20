@@ -154,7 +154,8 @@ function render_optimal(p, q) {
         h_ = step * max_h;
 
         a = step;
-        t = 1 - step;
+        t_step = (1.0 * (i-p)) / (q-p)
+        t = 1.0 - t_step;
         delta = 0.0001;
 
         while (Math.abs(h(a, t) - h_) > 0.001) {
