@@ -1,49 +1,49 @@
 :root {
-  --main-yellow: #d6cea7;
-  --main-red: #c72618;
+    --main-yellow: #d6cea7;
+    --main-red: #c72618;
 }
 
 #display {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: auto;
 }
 
 #bowie {
-  width: 100%;
+    width: 100%;
 }
 
 #controller {
-  font-family: Helvetica, sans-serif;
-  color: #d6cea7;
+    font-family: Helvetica, sans-serif;
+    color: #d6cea7;
 }
 
 body {
-  background: black;
+    background: black;
 }
 
 #root {
-  background: black;
-  max-width: 768px;
-  margin: 0 auto;
-  padding-left: 20%;
-  padding-right: 20%;
+    background: black;
+    max-width: 500px;
+    margin: 0 auto;
+    padding-left: 20%;
+    padding-right: 20%;
 }
 
 .headline {
-  font-size: 6rem;
-  font-weight: 600;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+    font-size: 4rem;
+    font-weight: 600;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
 }
 
 #controller > label {
-  color: white;
+    color: white;
 }
 
 #btn-container {
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
 }
