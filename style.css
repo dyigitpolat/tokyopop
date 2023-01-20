@@ -26,7 +26,7 @@ body {
 
 #root {
     background: black;
-    max-width: 500px;
+    max-width: 450px;
     margin: 0 auto;
     padding-left: 20%;
     padding-right: 20%;
@@ -56,6 +56,21 @@ body {
 }
 
 #copy-to-clipboard {
+    background: black;
+    color: #d6cea7;
+    border: 1px solid #d6cea7;
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#optimal-div {
+    display: flex;
+    justify-content: center;
+
     background: black;
     color: #d6cea7;
     border: 1px solid #d6cea7;
