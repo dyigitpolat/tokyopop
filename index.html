@@ -2,9 +2,9 @@
 
 <head>
     <title>tokyo pop.</title>
-    <script async type="text/javascript" src="tokyopop.js"></script>
-    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="input-range.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script async type="text/javascript" src="tokyopop.js"></script>
 </head>
 
 <body>
@@ -14,7 +14,13 @@
         </div>
 
         <div id="controller">
-            <h1 class="headline">tokyo pop</h1>
+            <!-- headline div -->
+            <div id="headline-div">
+                <p id="headline">tokyo pop</p>
+                <div id="btn-container">
+                    <button id="copy-to-clipboard" onclick="copyToClipboard()">Copy SVG</button>
+                </div>
+            </div>
             <div id="controls"><br />
                 <label for="alpha_slider">alpha: <span id="alpha_out"></span> </label>
                 <input class="range-input" type="range" min="0.1" max="4.5" value="1.0" step="0.01" id="alpha_slider"
@@ -41,13 +47,9 @@
                 <label for="q_slider">q: <span id="q_out"></span></label>
                 <input type="range" min="2" max="100" value="20" step="1" id="q_slider" onmousemove="update()"
                     onchange="update()" />
-
-                <br />
+                
                 <input type="checkbox" id="optimal" onchange="update()" />
                 <label for="optimal">Optimal</label>
-                <div id="btn-container">
-                    <button id='copy-to-clipboard' onclick="copyToClipboard()">Copy SVG</button>
-                </div>
             </div>
         </div>
 </body>

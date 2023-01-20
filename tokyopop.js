@@ -1,13 +1,5 @@
-stroke_width = 1.5;
-
 let svg = document.getElementById("bowie");
-
-WIDTH = document.getElementById("controls").offsetWidth;
-CX = WIDTH / 2;
-CY = WIDTH / 2;
-
-svg.setAttribute("width", WIDTH);
-svg.setAttribute("height", WIDTH);
+let stroke_width = 1.5;
 
 function updateWidth() {
     WIDTH = document.getElementById("controls").offsetWidth;
@@ -18,8 +10,9 @@ function updateWidth() {
     svg.setAttribute("height", WIDTH);
     update();
 }
-
 window.onresize = updateWidth;
+updateWidth();
+
 
 function drawFilledRectangle(x, y, w, h, color) {
     let rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");

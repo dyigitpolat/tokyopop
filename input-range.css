@@ -1,5 +1,6 @@
 input[type="range"] {
     height: 27px;
+    appearance: none;
     margin: 5px 0;
     width: 100%;
     background: transparent;
@@ -26,7 +27,7 @@ input[type="range"]::-webkit-slider-thumb {
     background: var(--main-red);
     cursor: pointer;
     -webkit-appearance: none;
-    margin-top: -2.5px;
+    margin-top: -5.5px;
 }
 input[type="range"]:focus::-webkit-slider-runnable-track {
     background: var(--main-yellow);

@@ -32,7 +32,14 @@ body {
     padding-right: 20%;
 }
 
-.headline {
+#headline-div {
+    /* headline should be justified to the right, btn-container to the left */
+    display: flex;
+    justify-content: space-between;
+
+}
+
+#headline {
     font-size: 4rem;
     font-weight: 600;
     margin-top: 0.3rem;
@@ -47,3 +54,16 @@ body {
     display: flex;
     justify-content: flex-end;
 }
+
+#copy-to-clipboard {
+    background: black;
+    color: #d6cea7;
+    border: 1px solid #d6cea7;
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
